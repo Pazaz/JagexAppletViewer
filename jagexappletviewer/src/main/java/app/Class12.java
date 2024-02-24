@@ -49,115 +49,117 @@ final class Class12 {
 			if (local32 == null) {
 				return null;
 			}
-			@Pc(43) MessageDigest local43;
-			@Pc(51) byte[] local51;
-			@Pc(55) String local55;
-			if (local21.aString11 != null) {
-				local43 = MessageDigest.getInstance("MD5");
-				local43.reset();
-				local43.update(local8);
-				local51 = local43.digest();
-				local55 = Class9.method28(local51, (byte) 50);
-				if (!local55.equals(local21.aString11)) {
-					return null;
-				}
-				local43.reset();
-				local43.update(local21.aByteArray3);
-				local51 = local43.digest();
-				local55 = Class9.method28(local51, (byte) 86);
-				if (!local55.equals(local32.aString11)) {
-					return null;
-				}
-			}
-			if (local21.aString10 == null && local21.aString12 == null) {
-				return null;
-			}
-			if (local21.aString12 == null) {
-				local43 = MessageDigest.getInstance("SHA1");
-				local43.reset();
-				local43.update(local8);
-				local51 = local43.digest();
-				local55 = Class9.method28(local51, (byte) 65);
-				if (!local55.equals(local21.aString10)) {
-					return null;
-				}
-				local43.reset();
-				local43.update(local21.aByteArray3);
-				local51 = local43.digest();
-				local55 = Class9.method28(local51, (byte) 46);
-				if (!local55.equals(local32.aString10)) {
-					return null;
-				}
-			} else {
-				local43 = MessageDigest.getInstance("SHA-256");
-				local43.reset();
-				local43.update(local8);
-				local51 = local43.digest();
-				local55 = Class9.method28(local51, (byte) 77);
-				if (!local55.equals(local21.aString12)) {
-					return null;
-				}
-				local43.reset();
-				local43.update(local21.aByteArray3);
-				local51 = local43.digest();
-				local55 = Class9.method28(local51, (byte) 33);
-				if (!local55.equals(local32.aString12)) {
-					return null;
-				}
-			}
-			@Pc(196) SignerInfo[] local196 = this.aPKCS7_1.verify(this.aByteArray1);
-			if (local196 == null || local196.length == 0) {
-				return null;
-			}
-			@Pc(213) ArrayList local213 = local196[0].getCertificateChain(this.aPKCS7_1);
-			@Pc(216) int local216 = local213.size();
-			if (local216 < 2) {
-				return null;
-			}
-			if (arg0 >= -94) {
-				this.aPKCS7_1 = null;
-			}
-			for (@Pc(232) int local232 = 0; local232 < local216; local232++) {
-				@Pc(244) X509Certificate local244 = (X509Certificate) local213.get(local232);
-				@Pc(248) String local248 = local244.getSubjectX500Principal().getName();
-				@Pc(252) String local252 = local244.getSerialNumber().toString();
-				@Pc(256) byte[] local256 = local244.getPublicKey().getEncoded();
-				@Pc(260) String local260 = Class9.method28(local256, (byte) 101);
-				if (local232 == 0) {
-					@Pc(269) int local269 = local248.indexOf("CN=");
-					if (local269 < 0) {
-						return null;
-					}
-					@Pc(279) int local279 = local248.indexOf(",", local269);
-					if (local279 < 0) {
-						local279 = local248.length();
-					}
-					if (!local248.substring(local269 + 3, local279).equals("Jagex Ltd")) {
-						return null;
-					}
-					@Pc(306) int local306 = local248.indexOf("O=");
-					if (local306 < 0) {
-						return null;
-					}
-					@Pc(320) int local320 = local248.indexOf(",", local306);
-					if (local320 < 0) {
-						local320 = local248.length();
-					}
-					if (!local248.substring(local306 + 2, local320).equals("Jagex Ltd")) {
-						return null;
-					}
-				}
-				if (local232 != local216 - 1) {
-					@Pc(350) X509Certificate local350 = (X509Certificate) local213.get(local232 + 1);
-					try {
-						local244.verify(local350.getPublicKey());
-					} catch (@Pc(356) Exception local356) {
-						return null;
-					}
-				} else if ((!local252.equals("10") || !local260.equals("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDGuLknYK8L45FpZdt+je2R5qrxvtXt/m3ULH/RcHf7JplXtN0/MLjcIepojYGS/C5LkTWEIPLaSrq0/ObaiPIgxSGSCUeVoAkcpnm+sUwd/PGKblTSaaHxTJM6Qf591GR7Y0X3YGAdMR2k6dMPi/tuJiSzqP/l5ZDUtMLcUGCuWQIDAQAB")) && (!local252.equals("1") || !local260.equals("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDSNjZqi9fCW57agUFijzjuSQRV1tDvHBuVFkfvGEg1OlL0K2oGjzsv6lbjr4aNnhf3nrRldQJN78sJoiFR2JvQZ9C6DZIGFHPUk8uXKgCcXE4MvPoVUvzyRG7aEUpuCJ8vLeP5qjqGc7ZGU1jIiQW9gxG4cz+qB430Qk3nQJ0cNwIDAQAB")) && (!local252.equals("69529181992039203566298953787712940909") && !local252.equals("68316673031993696956121215362381360273") || !local260.equals("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArKDw+4BZ1JzHpM+doVlzCRBFDA0sbmjxbFtIaElZN/wLMxnCd3/MEC2VNBzm600JpxzSuMmXNgK3idQkXwbAzESUlI0CYm/rWt0RjSiaXISQEHoNvXRmL2o4oOLVVETrHQefB7pv7un9Tgsp9T6EoAHxnKv4HH6JpOih2HFlDaNRe+680iJgDblbnd+6/FFbC6+Ysuku6QToYofeK8jXTsFMZB7dz4dYukpPymgHHRydSsbVL5HMfHFyHMXAZ+sy/cmSXJTahcCbv1N9Kwn0jJ2RH5dqUsveCTakd9h7h1BE1T5uKWn7OUkmHgmlgHtALevoJ4XJ/mH9fuZ8lx3VnQIDAQAB"))) {
-					return null;
-				}
-			}
+            if (ViewerConfig.VALIDATE_SIGNER) {
+                @Pc(43) MessageDigest local43;
+                @Pc(51) byte[] local51;
+                @Pc(55) String local55;
+                if (local21.aString11 != null) {
+                    local43 = MessageDigest.getInstance("MD5");
+                    local43.reset();
+                    local43.update(local8);
+                    local51 = local43.digest();
+                    local55 = Class9.method28(local51, (byte) 50);
+                    if (!local55.equals(local21.aString11)) {
+                        return null;
+                    }
+                    local43.reset();
+                    local43.update(local21.aByteArray3);
+                    local51 = local43.digest();
+                    local55 = Class9.method28(local51, (byte) 86);
+                    if (!local55.equals(local32.aString11)) {
+                        return null;
+                    }
+                }
+                if (local21.aString10 == null && local21.aString12 == null) {
+                    return null;
+                }
+                if (local21.aString12 == null) {
+                    local43 = MessageDigest.getInstance("SHA1");
+                    local43.reset();
+                    local43.update(local8);
+                    local51 = local43.digest();
+                    local55 = Class9.method28(local51, (byte) 65);
+                    if (!local55.equals(local21.aString10)) {
+                        return null;
+                    }
+                    local43.reset();
+                    local43.update(local21.aByteArray3);
+                    local51 = local43.digest();
+                    local55 = Class9.method28(local51, (byte) 46);
+                    if (!local55.equals(local32.aString10)) {
+                        return null;
+                    }
+                } else {
+                    local43 = MessageDigest.getInstance("SHA-256");
+                    local43.reset();
+                    local43.update(local8);
+                    local51 = local43.digest();
+                    local55 = Class9.method28(local51, (byte) 77);
+                    if (!local55.equals(local21.aString12)) {
+                        return null;
+                    }
+                    local43.reset();
+                    local43.update(local21.aByteArray3);
+                    local51 = local43.digest();
+                    local55 = Class9.method28(local51, (byte) 33);
+                    if (!local55.equals(local32.aString12)) {
+                        return null;
+                    }
+                }
+                @Pc(196) SignerInfo[] local196 = this.aPKCS7_1.verify(this.aByteArray1);
+                if (local196 == null || local196.length == 0) {
+                    return null;
+                }
+                @Pc(213) ArrayList local213 = local196[0].getCertificateChain(this.aPKCS7_1);
+                @Pc(216) int local216 = local213.size();
+                if (local216 < 2) {
+                    return null;
+                }
+                if (arg0 >= -94) {
+                    this.aPKCS7_1 = null;
+                }
+                for (@Pc(232) int local232 = 0; local232 < local216; local232++) {
+                    @Pc(244) X509Certificate local244 = (X509Certificate) local213.get(local232);
+                    @Pc(248) String local248 = local244.getSubjectX500Principal().getName();
+                    @Pc(252) String local252 = local244.getSerialNumber().toString();
+                    @Pc(256) byte[] local256 = local244.getPublicKey().getEncoded();
+                    @Pc(260) String local260 = Class9.method28(local256, (byte) 101);
+                    if (local232 == 0) {
+                        @Pc(269) int local269 = local248.indexOf("CN=");
+                        if (local269 < 0) {
+                            return null;
+                        }
+                        @Pc(279) int local279 = local248.indexOf(",", local269);
+                        if (local279 < 0) {
+                            local279 = local248.length();
+                        }
+                        if (!local248.substring(local269 + 3, local279).equals("Jagex Ltd")) {
+                            return null;
+                        }
+                        @Pc(306) int local306 = local248.indexOf("O=");
+                        if (local306 < 0) {
+                            return null;
+                        }
+                        @Pc(320) int local320 = local248.indexOf(",", local306);
+                        if (local320 < 0) {
+                            local320 = local248.length();
+                        }
+                        if (!local248.substring(local306 + 2, local320).equals("Jagex Ltd")) {
+                            return null;
+                        }
+                    }
+                    if (local232 != local216 - 1) {
+                        @Pc(350) X509Certificate local350 = (X509Certificate) local213.get(local232 + 1);
+                        try {
+                            local244.verify(local350.getPublicKey());
+                        } catch (@Pc(356) Exception local356) {
+                            return null;
+                        }
+                    } else if ((!local252.equals("10") || !local260.equals("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDGuLknYK8L45FpZdt+je2R5qrxvtXt/m3ULH/RcHf7JplXtN0/MLjcIepojYGS/C5LkTWEIPLaSrq0/ObaiPIgxSGSCUeVoAkcpnm+sUwd/PGKblTSaaHxTJM6Qf591GR7Y0X3YGAdMR2k6dMPi/tuJiSzqP/l5ZDUtMLcUGCuWQIDAQAB")) && (!local252.equals("1") || !local260.equals("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDSNjZqi9fCW57agUFijzjuSQRV1tDvHBuVFkfvGEg1OlL0K2oGjzsv6lbjr4aNnhf3nrRldQJN78sJoiFR2JvQZ9C6DZIGFHPUk8uXKgCcXE4MvPoVUvzyRG7aEUpuCJ8vLeP5qjqGc7ZGU1jIiQW9gxG4cz+qB430Qk3nQJ0cNwIDAQAB")) && (!local252.equals("69529181992039203566298953787712940909") && !local252.equals("68316673031993696956121215362381360273") || !local260.equals("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArKDw+4BZ1JzHpM+doVlzCRBFDA0sbmjxbFtIaElZN/wLMxnCd3/MEC2VNBzm600JpxzSuMmXNgK3idQkXwbAzESUlI0CYm/rWt0RjSiaXISQEHoNvXRmL2o4oOLVVETrHQefB7pv7un9Tgsp9T6EoAHxnKv4HH6JpOih2HFlDaNRe+680iJgDblbnd+6/FFbC6+Ysuku6QToYofeK8jXTsFMZB7dz4dYukpPymgHHRydSsbVL5HMfHFyHMXAZ+sy/cmSXJTahcCbv1N9Kwn0jJ2RH5dqUsveCTakd9h7h1BE1T5uKWn7OUkmHgmlgHtALevoJ4XJ/mH9fuZ8lx3VnQIDAQAB"))) {
+                        return null;
+                    }
+                }
+            }
 			return local8;
 		} catch (@Pc(412) Exception local412) {
 			local412.printStackTrace();

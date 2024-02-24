@@ -513,28 +513,30 @@ public final class appletviewer implements ComponentListener, AdjustmentListener
 				@Pc(287) String local287 = System.getProperty("os.arch").toLowerCase();
 				aBoolean2 = local283.startsWith("win");
 				aBoolean1 = aBoolean2 && (local287.startsWith("amd64") || local287.startsWith("x86_64"));
-				@Pc(314) String local314 = method15("viewerversion", -21747);
-				if (local314 != null) {
-					try {
-						@Pc(321) int local321 = Integer.parseInt(local314);
-						if (local321 > 124) {
-							Class16.method39(method11(100, "new_version"), method11(109, "new_version_link"), method11(127, "new_version_linktext"), (byte) 125);
-						} else if (local321 == 124) {
-							if (aBoolean2) {
-								if (Integer.parseInt(method15("win_sub_version", arg0 - 30612)) > 2) {
-									Class16.method39(method11(arg0 - 8757, "new_version"), method11(arg0 - 8746, "new_version_link"), method11(94, "new_version_linktext"), (byte) 126);
-								}
-							} else if (local287.startsWith("mac")) {
-								if (Integer.parseInt(method15("mac_sub_version", -21747)) > 2) {
-									Class16.method39(method11(95, "new_version"), method11(arg0 ^ 0x22F0, "new_version_link"), method11(111, "new_version_linktext"), (byte) -35);
-								}
-							} else if (Integer.parseInt(method15("other_sub_version", -21747)) > 2) {
-								Class16.method39(method11(83, "new_version"), method11(109, "new_version_link"), method11(99, "new_version_linktext"), (byte) 126);
-							}
-						}
-					} catch (@Pc(439) NumberFormatException local439) {
-					}
-				}
+                if (ViewerConfig.CHECK_VERSION) {
+				    @Pc(314) String local314 = method15("viewerversion", -21747);
+                    if (local314 != null) {
+                        try {
+                            @Pc(321) int local321 = Integer.parseInt(local314);
+                            if (local321 > 124) {
+                                Class16.method39(method11(100, "new_version"), method11(109, "new_version_link"), method11(127, "new_version_linktext"), (byte) 125);
+                            } else if (local321 == 124) {
+                                if (aBoolean2) {
+                                    if (Integer.parseInt(method15("win_sub_version", arg0 - 30612)) > 2) {
+                                        Class16.method39(method11(arg0 - 8757, "new_version"), method11(arg0 - 8746, "new_version_link"), method11(94, "new_version_linktext"), (byte) 126);
+                                    }
+                                } else if (local287.startsWith("mac")) {
+                                    if (Integer.parseInt(method15("mac_sub_version", -21747)) > 2) {
+                                        Class16.method39(method11(95, "new_version"), method11(arg0 ^ 0x22F0, "new_version_link"), method11(111, "new_version_linktext"), (byte) -35);
+                                    }
+                                } else if (Integer.parseInt(method15("other_sub_version", -21747)) > 2) {
+                                    Class16.method39(method11(83, "new_version"), method11(109, "new_version_link"), method11(99, "new_version_linktext"), (byte) 126);
+                                }
+                            }
+                        } catch (@Pc(439) NumberFormatException local439) {
+                        }
+                    }
+                }
 				@Pc(443) String local443 = method15("storebase", -21747);
 				if (local443 == null) {
 					local443 = method21("modewhat", (byte) 98);
