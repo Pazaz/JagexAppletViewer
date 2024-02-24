@@ -1,0 +1,15 @@
+rootProject.name = "JagexAppletViewer"
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        flatDir {
+            dirs 'lib'
+        }
+    }
+}
+
+include(
+    "deob-annotations",
+    "jagexappletviewer",
+)
