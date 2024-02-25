@@ -41,15 +41,15 @@ final class Class12 {
 			if (local8 == null) {
 				return null;
 			}
-			@Pc(21) Class19 local21 = (Class19) this.aHashtable6.get(arg1);
-			if (local21 == null) {
-				return null;
-			}
-			@Pc(32) Class19 local32 = (Class19) this.aHashtable7.get(arg1);
-			if (local32 == null) {
-				return null;
-			}
             if (ViewerConfig.VALIDATE_SIGNER) {
+                @Pc(21) Class19 local21 = (Class19) this.aHashtable6.get(arg1);
+                if (local21 == null) {
+                    return null;
+                }
+                @Pc(32) Class19 local32 = (Class19) this.aHashtable7.get(arg1);
+                if (local32 == null) {
+                    return null;
+                }
                 @Pc(43) MessageDigest local43;
                 @Pc(51) byte[] local51;
                 @Pc(55) String local55;
